@@ -66,8 +66,9 @@ always @(posedge rd clk) begin
 
 
 
-if (rst) rd_pointer<=0;
-
+   if (rst) begin rd_pointer<=0;
+     valid <= 0;
+   end
 else begin
 
      if (rd && !empty) begin
@@ -75,8 +76,9 @@ else begin
      rd_pointer <= rd_pointer+1;
 
         rdata<=mem[rd_pointer];//readoperation
-
-
+           valid <= 1;
+           
+           
      end
 
    end
@@ -152,11 +154,11 @@ assign full =  (wr_pntr_g [adress_size-1]!=rd_pntr_g_s2 [adress_size-1])
 //overflow
  
 always @(posedge wr_clk)
- overflow = full && wr; 
+   overflow = (full && wr); 
  
 always @(posedge rd clk) 
-begin underflow <= empty && rd;
- valid <= (rd && empty) ;
+   begin underflow <= (empty && rd);
+   
 
 end
 
