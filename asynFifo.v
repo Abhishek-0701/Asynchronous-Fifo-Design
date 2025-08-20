@@ -20,7 +20,7 @@ module asyn fifo
 
 reg adress [size-1:0] wr_pointer,wr_pntr_g_s1,wr_pntr_g_s2;
 
-reg adress [size-1:0] rd_pointer,rd_pntr_g_s1,rd_potr.g_s2;
+reg adress [size-1:0] rd_pointer,rd_pntr_g_s1,rd_pntr_g_s2;
 
 wire[adress_size-1:0] wr_pntr_g;
 wire[adress_size-1:0] rd_pntr_g;
