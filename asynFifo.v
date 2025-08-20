@@ -29,7 +29,6 @@ parameter fifo_depth=5;
 
 reg adress [size-1:0] wr_pointer,wr_pntr_g_s1,wr_pntr_g_s2;
 
-
 reg adress [size-1:0] rd_pointer,rd_pntr_g_s1,rd_potr.g_s2;
 
 
@@ -47,7 +46,7 @@ reg [data width-1:0] mem [fifo_deoth-1:0);
 
 // writing data into FIFO
 
-always (posedge wr_clk) begin
+always @(posedge wr_clk) begin
 
 if (rst) wr pointer<=0;
 
@@ -84,16 +83,16 @@ if (rst) rd_pointer<=0;
 
 else begin
 
-if (rd && !empty) begin
+     if (rd && !empty) begin
 
-rd_pointer <= rd_pointer+1;
+   rd_pointer <= rd_pointer+1;
 
-rdata<=mem(rd_pointer)://readoperation
+    rdata<=mem(rd_pointer)://readoperation
 
 
-end
+     end
 
-end
+   end
 
 
 end
@@ -111,45 +110,45 @@ assign rd_pntr_g rd_pointer ^ (rd_pointer>>1);
 
 //2 stage synchronizer for wr_pointr wrt rd_clk
 
-always (posedge rd_clk) begin
+always @(posedge rd_clk) begin
 
-if (rst) begin
+     if (rst) begin
 
-wr_pntr_g_s1<=0;
+                  wr_pntr_g_s1<=0;
+ 
+                 wr_pntr_g_s2<=0;
+    
+              end
+ 
+  else begin
 
-wr_pntr_g_s2<=0;
+     wr_pntr_g_s1 <= wr_pntr_g; // 1ff
 
-end
+     wr_pntr_g_s2 <= wr_pntr_g_s1;//1 ff
 
-else begin
-
-wr_pntr_g_s1 <= wr_pntr_g; // 1ff
-
-wr_pntr_g_s2 <= wr_pntr_g_s1;//1 ff
-
-end
+   end
 
 end
 
 //2 stage synchronizer for rd_pointr wrt wr_clk
 
-always (posedge wr_clk) begin
+always @(posedge wr_clk) begin
 
-if (rst) begin
+     if (rst) begin
 
-rd_pntr_g_s1<=0;
+          rd_pntr_g_s1<=0;
 
-rd_pntr_g_s2<=0;
+          rd_pntr_g_s2<=0;
 
-end
+         end
 
 else begin
 
-rd_pntr_g_s1 <= rd pntr_g: //1ff
+     rd_pntr_g_s1 <= rd pntr_g: //1ff
 
-rd_pntr_g_s2 <= wr_pntr_g_s1;//1 ff
+     rd_pntr_g_s2 <= wr_pntr_g_s1;//1 ff
 
-end
+    end
 
 end
 
