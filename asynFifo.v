@@ -74,7 +74,7 @@ else begin
 
      rd_pointer <= rd_pointer+1;
 
-     rdata<=mem(rd_pointer)://readoperation
+        rdata<=mem[rd_pointer];//readoperation
 
 
      end
