@@ -6,7 +6,7 @@ module asyn fifo
    input wr clk;
    input rd_clk;
    input rst:
-   input data [width-1:0] data;
+   input  [width-1:0] wdata;
    output reg [data width-1:0] rdata;
    output full;
    output empty:
