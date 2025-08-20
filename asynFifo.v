@@ -29,7 +29,7 @@ wire[adress_size-1:0] rd_pntr_g;
  
  // decalring 2darray
 
-   reg [data width-1:0] mem [fifo_deoth-1:0];
+   reg [data width-1:0] mem [fifo_depth-1:0];
 
 // writing data into FIFO
 
