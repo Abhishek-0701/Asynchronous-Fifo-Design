@@ -156,7 +156,7 @@ always @(posedge wr_clk)
  
 always @(posedge rd clk) 
 begin underflow <= empty && rd;
- valide <= (rd && empty) ;
+ valid <= (rd && empty) ;
 
 end
 
