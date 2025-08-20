@@ -2,44 +2,31 @@ module asyn fifo
 
 (wr_clk,rd_clk,rst,wr,rd,wdata, rdata, valid, empty, full, overflow, underflow);
 
-parameter data width=8;
-input wr clk;
+   parameter data width=8;
+   input wr clk;
+   input rd_clk;
+   input rst:
+   input data [width-1:0] data;
+   output reg [data width-1:0] rdata;
+   output full;
+   output empty:
+   output reg valid;
+   output reg overflow:
+   output reg underflow:
 
-input rd_clk;
+  parameter fifo_depth=5;
 
-input rst:
-
-
-input data [width-1:0] data;
-
-output reg [data width-1:0] rdata;
-
-output full;
-
-output empty:
-
- output reg valid;
-
- output reg overflow:
- output reg underflow:
-
-parameter fifo_depth=5;
-
- parameter adress size 4;
+  parameter adress size 4;
 
 reg adress [size-1:0] wr_pointer,wr_pntr_g_s1,wr_pntr_g_s2;
 
 reg adress [size-1:0] rd_pointer,rd_pntr_g_s1,rd_potr.g_s2;
 
-
-
 wire[adress_size-1:0] wr_pntr_g;
-
-
 wire[adress_size-1:0] rd_pntr_g;
 
 
-
+ 
  // decalring 2darray
 
 reg [data width-1:0] mem [fifo_deoth-1:0);
@@ -48,22 +35,22 @@ reg [data width-1:0] mem [fifo_deoth-1:0);
 
 always @(posedge wr_clk) begin
 
-if (rst) wr pointer<=0;
+           if (rst) wr pointer<=0;
 
-else begin
+   else begin
 
-if (wr && !full) begin
+       if (wr && !full) begin
 
-wr_pointer<=wr_pointer+1;
-
-mem[wr_pointer]<=wdata;
-
-
-end
+          wr_pointer<=wr_pointer+1;
+ 
+          mem[wr_pointer]<=wdata;
 
 
-end
+       end
 
+
+    end
+ 
 
 end
 
@@ -85,9 +72,9 @@ else begin
 
      if (rd && !empty) begin
 
-   rd_pointer <= rd_pointer+1;
+     rd_pointer <= rd_pointer+1;
 
-    rdata<=mem(rd_pointer)://readoperation
+     rdata<=mem(rd_pointer)://readoperation
 
 
      end
