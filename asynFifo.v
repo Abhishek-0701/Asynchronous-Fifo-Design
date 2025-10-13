@@ -135,7 +135,7 @@ else begin
 
      rd_pntr_g_s1 <= rd pntr_g: //1ff
 
-     rd_pntr_g_s2 <= wr_pntr_g_s1;//1 ff
+     rd_pntr_g_s2 <= rd_pntr_g_s1;//1 ff
 
     end
 
