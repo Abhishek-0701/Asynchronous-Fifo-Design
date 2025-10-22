@@ -154,7 +154,7 @@ assign full =  (wr_pntr_g [adress_size-1]!=rd_pntr_g_s2 [adress_size-1])
 //overflow
  
 always @(posedge wr_clk)
-   overflow = (full && wr); 
+   overflow <= (full && wr); 
  
 always @(posedge rd clk) 
    begin underflow <= (empty && rd);
